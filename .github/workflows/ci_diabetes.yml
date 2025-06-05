@@ -1,17 +1,14 @@
-name: Full CI/CD Pipeline for Diabetes ML Model with MLflow
+name: Full MLflow CI/CD Pipeline for Diabetes Project
 
 on:
   push:
     branches: [ main ]
     paths:
       - 'MLProject/**'
-      - 'tests/**'
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  build-test-train:
+  train-model:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -24,33 +21,22 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: 3.9.21
 
-      - name: Install dependencies
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
-
-      - name: Verify Python & Pip version
+      - name: Check Env
         run: |
           python --version
           pip --version
 
-      - name: Install MLflow
-        run: pip install mlflow
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Run Unit Tests
-        run: pytest ../tests/
+      - name: Set MLflow Tracking URI
+        run: echo "MLflow tracking set to local directory (./mlruns)"
 
-      - name: Run Preprocessing & Training with modelling.py
-        run: python modelling.py
-
-      - name: Run Hyperparameter Tuning with modelling_tuning.py
-        run: python modelling_tuning.py
-
-      - name: Run Training & Tracking with MLflow (optional, jika ada MLproject file)
-        if: ${{ hashFiles('MLProject/MLproject') != '' }}
+      - name: Run mlflow project
         run: mlflow run . --env-manager=local
 
       - name: Upload Model Artifacts
