@@ -21,25 +21,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Miniconda
-        uses: conda-incubator/setup-miniconda@v2
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
-          auto-activate-base: false
 
-      - name: Manually create conda environment
-        run: conda env create -f conda.yaml
-
-      - name: Run commands in conda env
+      - name: Install dependencies
         run: |
-          conda run -n mlflow-env python --version
-          conda run -n mlflow-env pip install mlflow
-          conda run -n mlflow-env pytest tests/
-          conda run -n mlflow-env python MLProject/modelling.py
-          conda run -n mlflow-env python MLProject/modelling_tuning.py
-          conda run -n mlflow-env mlflow run MLProject --env-manager=local
-
-
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
 
       - name: Verify Python & Pip version
         run: |
