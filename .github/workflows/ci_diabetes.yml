@@ -29,7 +29,7 @@ jobs:
 
       - name: Manually create conda environment
         run: |
-          conda env create -f MLProject/conda.yaml
+          conda env create -f conda.yaml
           conda activate mlflow-env
 
       - name: Verify Python & Pip version
