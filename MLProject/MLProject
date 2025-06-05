@@ -1,7 +1,7 @@
-name: diabetes-mlflow-ci
-
-conda_env: conda.yaml
+name: diabetes-mlflow-project
 
 entry_points:
   main:
-    command: "python modelling_tuning.py"
+    command: >
+      python modelling.py &&
+      python modelling_tuning.py
