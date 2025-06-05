@@ -36,7 +36,7 @@ jobs:
       - name: Set MLflow Tracking URI
         run: echo "MLflow tracking set to local directory (./mlruns)"
 
-      - name: Run mlflow project
+      - name: Run mlflow project (Train + Tune)
         run: mlflow run . --env-manager=local
 
       - name: Upload Model Artifacts
