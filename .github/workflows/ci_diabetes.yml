@@ -24,13 +24,11 @@ jobs:
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v2
         with:
+          activate-environment: mlflow-env
+          environment-file: conda.yaml
           python-version: 3.9
           auto-activate-base: false
 
-      - name: Manually create conda environment
-        run: |
-          conda env create -f conda.yaml
-          conda activate mlflow-env
 
       - name: Verify Python & Pip version
         run: |
