@@ -36,6 +36,10 @@ jobs:
       - name: Set MLflow Tracking URI
         run: echo "MLflow tracking set to local directory (./mlruns)"
 
+      - name: Check mlruns existence
+        run: |
+          ls -R mlruns || echo "mlruns not found"
+
       - name: Run mlflow project (Train + Tune)
         run: mlflow run . --env-manager=local
 
