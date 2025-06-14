@@ -33,7 +33,7 @@ def evaluate_model(model, X_test, y_test):
         "f1_score": f1_score(y_test, y_pred)
     }
 
-ef main():
+def main():
     X_train, X_test, y_train, y_test = load_data()
 
     #set tracking uri
