@@ -39,7 +39,7 @@ def main():
     # Aktifkan autologging sebelum start_run
     mlflow.sklearn.autolog()
 
-    with mlflow.start_run(nested=True):
+    with mlflow.start_run():
         model = train_model(X_train, y_train)
         metrics = evaluate_model(model, X_test, y_test)
 
