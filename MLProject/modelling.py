@@ -33,20 +33,21 @@ def evaluate_model(model, X_test, y_test):
         "f1_score": f1_score(y_test, y_pred)
     }
 
-def main():
+ef main():
     X_train, X_test, y_train, y_test = load_data()
 
-    # Mulai MLflow
+    #set tracking uri
+    mlflow.set_tracking_uri("http://127.0.0.1:5000")
+
+     # Aktifkan autologging sebelum start_run
+    mlflow.sklearn.autolog()
+
     with mlflow.start_run():
         model = train_model(X_train, y_train)
         metrics = evaluate_model(model, X_test, y_test)
 
-        # Manual Logging (Skilled)
-        for key, val in metrics.items():
-            mlflow.log_metric(key, val)
-
-        mlflow.sklearn.log_model(model, "model")
-        print("Model dan metriks berhasil dilog ke MLflow.")
+        # Tidak perlu manual logging, sudah otomatis dengan autolog
+        print("Model dan metriks berhasil dilog ke MLflow melalui autolog.")
         print(metrics)
 
 if __name__ == "__main__":
