@@ -97,9 +97,6 @@ def log_params_json(params_dict):
 def main():
     X_train, X_test, y_train, y_test = load_data()
 
-    #set tracking uri
-    mlflow.set_tracking_uri("http://127.0.0.1:5000")
-
     with mlflow.start_run():
         model, best_params = train_model(X_train, y_train)
         metrics = evaluate_model(model, X_test, y_test)
