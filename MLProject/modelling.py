@@ -36,10 +36,10 @@ def evaluate_model(model, X_test, y_test):
 def main():
     X_train, X_test, y_train, y_test = load_data()
 
-     # Aktifkan autologging sebelum start_run
+    # Aktifkan autologging sebelum start_run
     mlflow.sklearn.autolog()
 
-    with mlflow.start_run():
+    with mlflow.start_run(nested=True):
         model = train_model(X_train, y_train)
         metrics = evaluate_model(model, X_test, y_test)
 
