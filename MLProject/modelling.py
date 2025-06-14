@@ -36,9 +36,6 @@ def evaluate_model(model, X_test, y_test):
 def main():
     X_train, X_test, y_train, y_test = load_data()
 
-    #set tracking uri
-    mlflow.set_tracking_uri("http://127.0.0.1:5000")
-
      # Aktifkan autologging sebelum start_run
     mlflow.sklearn.autolog()
 
