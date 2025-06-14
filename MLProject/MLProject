@@ -1,14 +1,7 @@
 name: diabetes-mlflow-project
 
 entry_points:
-  main:
-    parameters: {}
-    command: >
-      python modelling.py &&
-      python modelling_tuning.py
-
   modelling:
     command: python modelling.py
-
   tuning:
     command: python modelling_tuning.py
